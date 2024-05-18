@@ -197,13 +197,13 @@ func (dialector Dialector) DataTypeOf(field *schema.Field) string {
 	switch field.DataType {
 	case schema.Bool:
 		return "numeric"
-	case schema.Int, schema.Uint:
-		if field.AutoIncrement {
+	case schema.Int, schema.Uint, "INTEGER":
+		if field.AutoIncrement && field.PrimaryKey {
 			// doesn't check `PrimaryKey`, to keep backward compatibility
 			// https://www.sqlite.org/autoinc.html
-			return "integer PRIMARY KEY AUTOINCREMENT"
+			return "INTEGER PRIMARY KEY AUTOINCREMENT"
 		} else {
-			return "integer"
+			return "INTEGER"
 		}
 	case schema.Float:
 		return "real"
