@@ -1,4 +1,4 @@
-module gorm.io/driver/sqlite
+module github.com/WaterCool8258/sqlite
 
 go 1.20
 
